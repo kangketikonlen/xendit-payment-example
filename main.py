@@ -4,7 +4,7 @@ from fastapi.param_functions import Depends
 from fastapi.staticfiles import StaticFiles
 
 from utils.auth_util import AuthHandler
-from routers import auth_route, user_route
+from routers import auth_route, user_route, ewallet_route
 
 app = FastAPI()
 auth = AuthHandler()
@@ -31,4 +31,11 @@ app.include_router(
     prefix="/users",
     tags=["Manage Users"],
     dependencies=[Depends(auth.auth_wrapper)]
+)
+
+app.include_router(
+    ewallet_route.router,
+    prefix="/ewalet",
+    tags=["Manage E-Wallet Payment"],
+    # dependencies=[Depends(auth.auth_wrapper)]
 )
