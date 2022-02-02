@@ -4,7 +4,7 @@ from fastapi.param_functions import Depends
 from fastapi.staticfiles import StaticFiles
 
 from utils.auth_util import AuthHandler
-from routers import auth_route, user_route, ewallet_route, qris_route, virtacc_route
+from routers import auth_route, user_route, ewallet_route, qris_route, virtacc_route, callback_route
 
 app = FastAPI()
 auth = AuthHandler()
@@ -51,5 +51,12 @@ app.include_router(
     virtacc_route.router,
     prefix="/virtual-account",
     tags=["Manage Virtual Account Payment"],
+    # dependencies=[Depends(auth.auth_wrapper)]
+)
+
+app.include_router(
+    callback_route.router,
+    prefix="/callback",
+    tags=["Manage Callback API"],
     # dependencies=[Depends(auth.auth_wrapper)]
 )
