@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 KEY = os.environ["XENDIT_KEY"]
 HEADERS = {"Authorization": f"Basic {KEY}"}
-URL = os.environ["EWALLET_CHARGE_URL"]
+URL = f"{os.environ['XENDIT_URL']}/ewallets/charges"
 REF_ID = str(uuid.uuid4()).lower()
 
 
